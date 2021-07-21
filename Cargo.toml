@@ -37,3 +37,6 @@ required-features = ["example_deps"]
 [[example]]
 name = "user_lines"
 required-features = ["example_deps"]
+
+[patch.crates-io]
+bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false, features = ["render"] }

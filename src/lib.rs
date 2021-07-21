@@ -6,7 +6,7 @@
 
 use bevy::prelude::*;
 use bevy::render::mesh::VertexAttributeValues;
-use bevy::render::pipeline::{PrimitiveTopology, PipelineDescriptor, RenderPipeline, PrimitiveState, CullMode };
+use bevy::render::pipeline::{Face, PipelineDescriptor, PrimitiveState, PrimitiveTopology, RenderPipeline};
 use bevy::render::shader::{ShaderStages, ShaderStage};
 use bevy::render::render_graph::{AssetRenderResourcesNode, RenderGraph};
 use bevy::render::render_graph::base;
@@ -48,7 +48,7 @@ pub const MAX_POINTS: usize = MAX_LINES * 2;
 fn create_mesh() -> Mesh {
     let mut mesh = Mesh::new(PrimitiveTopology::LineList);
     let positions = vec![[0.0, 0.0, 0.0]; MAX_LINES * 2];
-    mesh.set_attribute(Mesh::ATTRIBUTE_POSITION,VertexAttributeValues::Float3(positions.into()));
+    mesh.set_attribute(Mesh::ATTRIBUTE_POSITION,VertexAttributeValues::Float32x3(positions.into()));
 
     mesh
 }
@@ -71,7 +71,7 @@ fn setup(
 
     // Disable backface culling (enable two sided rendering).
     p.primitive = PrimitiveState {
-        cull_mode: CullMode::None,
+        cull_mode: Some(Face::Back),
         ..Default::default()
     };
 

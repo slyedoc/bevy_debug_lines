@@ -40,6 +40,7 @@ impl Plugin for DebugLinesPlugin {
     }
 }
 
+
 /// Maximum number of unique lines to draw at once.
 pub const MAX_LINES: usize = 128000;
 /// Maximum number of points.
@@ -48,7 +49,7 @@ pub const MAX_POINTS: usize = MAX_LINES * 2;
 fn create_mesh() -> Mesh {
     let mut mesh = Mesh::new(PrimitiveTopology::LineList);
     let positions = vec![[0.0, 0.0, 0.0]; MAX_LINES * 2];
-    mesh.set_attribute(Mesh::ATTRIBUTE_POSITION,VertexAttributeValues::Float32x3(positions.into()));
+    mesh.set_attribute(Mesh::ATTRIBUTE_POSITION,VertexAttributeValues::Float32x3(positions));
 
     mesh
 }
@@ -61,7 +62,7 @@ fn setup(
     mut materials: ResMut<Assets<LineShader>>,
     mut render_graph: ResMut<RenderGraph>,
 ) {
-    let mut p = 
+    let mut p =
         PipelineDescriptor::default_config(
             ShaderStages {
                 vertex: shaders.add(Shader::from_glsl(ShaderStage::Vertex, include_str!("line.vert"))),

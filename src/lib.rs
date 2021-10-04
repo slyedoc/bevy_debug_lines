@@ -31,7 +31,7 @@ use bevy::reflect::TypeUuid;
 /// ```
 pub struct DebugLinesPlugin;
 impl Plugin for DebugLinesPlugin {
-    fn build(&self, app: &mut AppBuilder) {
+    fn build(&self, app: &mut App) {
         app
             .add_asset::<LineShader>()
             .init_resource::<DebugLines>()
